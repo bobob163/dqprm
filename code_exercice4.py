@@ -41,19 +41,49 @@ fc_arr = []
 data_arr = data.copy()
 valuestoremove = []
 
-############# à complèter stp :)
-
 for i in range(tagindex.size):
-    # Store value of saturation for each tag index
-    sat_arr.append(...)
-    # Store value of pulse rate for each tag index
-    fc_arr.append(...)
-    # Store corresponding indices as well as tag and closing values ones
-    valuestoremove.append(...)
+    idx = tagindex[i]
 
-# Remove these values from the original data
-data_arr=np.delete(...)
+    sat_arr.append(data.iloc[idx+1, 0])
+
+    fc_arr.append(data.iloc[idx+2, 0])
+
+    valuestoremove.extend([idx, idx+1, idx+2])
+
+
+data_arr = np.delete(data, valuestoremove, axis=0)
+
+print(sat_arr)
+print(fc_arr)
+print(valuestoremove)
+print(data_arr)
+
+###
 
 plt.subplots(3,2,figsize=(15,13))
 
-...
+plt.subplot(3,2,1)
+plt.plot(data)
+plt.title('Données complètes')
+
+plt.subplot(3,2,2)
+plt.plot(data_arr)
+plt.title('Données netoyées')
+
+plt.subplot(3,2,3)
+plt.plot(data_arr[0:300], 'g')
+plt.title('Données netoyées réduites aux 300 premières valeurs')
+
+plt.subplot(3,2,4)
+plt.plot(fc_arr, 'b')
+plt.title('Valeur de fréquence cardiaque')
+
+plt.subplot(3,2,5)
+plt.plot(sat_arr, 'r')
+plt.title('Valeur de saturation')
+
+plt.subplot(3,2,6)
+plt.plot(fc_arr, 'b')
+plt.plot(sat_arr, 'r')
+plt.ylim(0, 120)
+plt.title('Valeur de fréquence cardiaque et de saturation sur un même graphique')
