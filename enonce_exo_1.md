@@ -10,4 +10,5 @@ Ecrire une fonction qui calcule l'indice de masse corporelle (IMC) d'un(e) patie
 
 <img width=400 src='./data/imc.gif'>
 
+#C'est bien vu !
 ---
